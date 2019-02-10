@@ -19,6 +19,13 @@ WHERE [User Id] IN (
 
 --- 2. Report conflicting data
 -- 2.1. List of User_ID having email both in and out of Control list
+                        
+CREATE INDEX IDX_EMAIL
+ON Control_Group([User Email])
+
+CREATE INDEX IDX_EMAIL
+ON Mail_info([Email Address])
+GO
 
 SELECT *,
         CASE WHEN [Email Address] IN (SELECT DISTINCT [User Email] FROM Control_Group) THEN 'Yes'
